@@ -6,3 +6,5 @@ build/*
 .project
 /build/
 /bin/
+src/main/resources/*
+src/test/resources/*

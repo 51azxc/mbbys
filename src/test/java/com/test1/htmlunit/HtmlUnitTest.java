@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.test1.config.WebConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
+@WebAppConfiguration(value="test1/src/main/webapp")
 @ContextConfiguration(classes = { WebConfig.class })
 public class HtmlUnitTest {
   @Autowired

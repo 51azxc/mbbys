@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
+@WebAppConfiguration(value="test1/src/main/webapp")
 @ContextConfiguration(classes = { WebConfig.class })
 @Transactional
 public class ControllerTest {
