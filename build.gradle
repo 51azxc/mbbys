@@ -1,0 +1,53 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+repositories {
+	maven { 
+	  url "http://repo.spring.io/libs-release"
+	  url "http://maven.oschina.net/content/groups/public/"
+	  url "http://maven.oschina.net/content/repositories/thirdparty/"
+	}
+    mavenCentral()
+}
+
+dependencies {
+	providedCompile( 
+		'javax.servlet:javax.servlet-api:3.1.0',
+		'javax.servlet.jsp:jsp-api:2.2'
+	)
+	compile(
+		'org.springframework:spring-context:4.2.5.RELEASE',
+		'org.springframework:spring-webmvc:4.2.5.RELEASE',
+		'org.springframework:spring-tx:4.2.5.RELEASE',
+		'org.springframework:spring-jdbc:4.2.5.RELEASE',
+		'org.mybatis:mybatis:3.3.1',
+		'org.mybatis:mybatis-spring:1.2.4',
+		'com.mchange:c3p0:0.9.5.2',
+		'commons-codec:commons-codec:1.10',
+		'mysql:mysql-connector-java:5.1.6'
+	)
+	testCompile(
+		'junit:junit:4.12',
+		'org.springframework:spring-test:4.2.5.RELEASE',
+		'com.google.code.gson:gson:2.6.2',
+		'org.eclipse.jetty:jetty-server:9.2.15.v20160210',
+		'org.eclipse.jetty:jetty-webapp:9.2.15.v20160210',
+		'org.eclipse.jetty:jetty-jsp:9.2.15.v20160210',
+		'net.sourceforge.htmlunit:htmlunit:2.20',
+		'org.assertj:assertj-core:3.3.0',
+		'org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0'
+	)
+	runtime 'javax.servlet:jstl:1.2'
+}
+
+jettyRun{
+    webAppSourceDirectory file("$projectDir/src/main/webapp")
+    httpPort 8080
+    stopPort = 8089
+		stopKey = 'ss'
+    contextPath project.name
+    scanIntervalSeconds 0
+    reload "automatic"
+}
