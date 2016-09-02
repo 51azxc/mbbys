@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.PostMapper">
+    <resultMap id="postResult" type="Post">
+        <id property="id" column="id" />
+        <result property="body" column="body" />
+        <result property="createDate" column="createDate" />
+        <association property="user" column="user_id" javaType="User" select="getUser" />
+    </resultMap>
+    <select id="getPostById" resultMap="postResult">
+        select * from post where id = #{id}
+    </select>
+
+    <select id="getUser" resultType="User">
+        select id, username from user where id = #{id}
+    </select>
+
+    <select id="getUserPost" resultMap="postResult">
+        select * from post where user_id = #{userId} order by createDate desc
+    </select>
+
+    <select id="getAllPosts" resultMap="postResult">
+        select * from post order by createDate desc
+    </select>
+
+    <insert id="addPost" useGeneratedKeys="true" keyProperty="id">
+        insert into post (body, createDate, user_id) values(#{body}, #{createDate}, #{user.id})
+    </insert>
+
+    <delete id="deletePost">
+        delete from post where id = #{id}
+    </delete>
+</mapper>
